@@ -2,10 +2,9 @@
 即說即搜，用講的就能"立即"搜尋你的個人電腦檔案。
 
 
-## Function Overview
-* 採用以下API製作完成
+## Function API Overview
 * everything search engine
-* Chrome 語音輸入API
+* Chrome內建語音輸入API webkitSpeechRecognition()
 
 
 ## Getting Started
