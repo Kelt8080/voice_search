@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search files by voice</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="top-bar">
+    <div class="logo">
+        <a title=""><i class=""><img src="https://kelt8080.github.io/public//image/app/mit_001.png" width="25" height="25"></i> cpoffice</a>
+    </div>
+    
+    <div class="c-form">
+        <input type="text"  id="search_text"  onKeyUp="doSomething(event);" placeholder="Seach Files">
+        <button type="submit" id="speech_icon"  onClick="speech_input();" ><i id="speech_class" class="fa fa-microphone text-danger"></i></button>
+    </div>
+    
+
+    <div class="made-with">
+        <p title="">© 2017 Made with Kelt Chen</p>
+    </div>
+    
+</div>
+
+<div class="main-content">
+                <div class="widget">
+                    <iframe   name="ifrm_main" id="ifrm_main" src="about:blank"  width='100%'  frameborder="0" scrolling="yes" sandbox="allow-same-origin allow-popups allow-forms allow-scripts">Loading…</iframe>
+                </div><!-- Widget -->
+</div>
+
+
+  <script type="text/javascript" async="true">        
+  window.frames['ifrm_main'].document.location="http://127.0.0.1/";
+  document.getElementById('ifrm_main').style.height=window.outerHeight+"px";
+  setTimeout(resizeFunction, 3000);
+  setTimeout(resizeFunction, 6000);
+  setTimeout(resizeFunction, 9000);
+
+  window.addEventListener("resize", resizeFunction);
+	  function resizeFunction() {
+	    document.getElementById('ifrm_main').style.height=window.outerHeight+"px";
+    }
+    </script>
+
+
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+<script src="js/common.js"></script>
+
+  <script type="text/javascript">
+  var permission  = false;
+  var speech_state = 0;
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous=true;
+  recognition.interimResults=true;
+  speech_input();
+  
+
+	function speech_input() {
+    recognition.lang="cmn-Hant-TW";
+    if(permission){
+              recognition.stop();
+            } 
+     else{
+              recognition.onresult=function(event){
+                var i = event.resultIndex;
+                var j = event.results[i].length-1;
+                document.getElementById("search_text").value=event.results[i][j].transcript;
+                redirect();
+              }
+              recognition.start();
+            }
+	}
+	
+
+    recognition.onstart = function() { 
+        permission = true; 
+        document.getElementById("speech_class").className='fa fa-microphone text-danger';
+    }
+   
+    recognition.onend   = function() { 
+       permission = false; 
+       document.getElementById("speech_class").className='fa fa-microphone-slash';
+    }
+	
+
+    function doSomething(e) {
+        var keyCode = e.keyCode || e.charCode;
+        if (keyCode === 13) {
+            redirect();
+        }
+    }
+  
+  
+    function redirect() {
+		var add=document.getElementById("search_text").value;
+		document.getElementById('ifrm_main').src = encodeURI('http://127.0.0.1/?search='+add+'&sort=date_modified&ascending=0');
+        window.showModalDialog(encodeURI(Url), window, Feature  ); 
+		}
+		
+		
+  jQuery(function(){  
+  $('#search_text').on('keyup', function() {
+    redirect();
+  });
+  $('#search_text').keyup(function() {
+    redirect();
+  });
+  $('#search_text').on('change', function() {
+    redirect();
+  });
+
+  $('#search_text').change(function() {
+    redirect();
+  });
+  });
+    </script>
+
+
+</body>
+</html>
