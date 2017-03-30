@@ -68,8 +68,6 @@
 	  function resizeFunction() {
 	    var r = DetectZoom.ratios();
 	    var rationn = r.devicePxPerCssPx;
-	    if (rationn>1) {rationn=rationn*0.9;} 
-	    if (rationn<1) {rationn=rationn*1.1;}
 	    
         var content_height_i = window.outerHeight;
         var height_i = Math.round(714.2*Math.pow(rationn,-0.617));
