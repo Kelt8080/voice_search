@@ -72,8 +72,8 @@
 	    if (rationn<1) {rationn=rationn*1.1;}
 	    
         var content_height_i = window.outerHeight;
-        var height_i = Math.round((content_height_i-80)/rationn)-30;
-        var height_f = Math.round((content_height_i-150)/rationn+100);
+        var height_i = Math.round(714.2*Math.pow(rationn,-0.617));
+        var height_f = Math.round(830.3*Math.pow(rationn,-0.602));
         
         if (!window.screenTop && !window.screenY) {
              document.getElementById('ifrm_main').style.height=height_i+"px";
