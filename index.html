@@ -16,7 +16,7 @@
     
     <div class="c-form">
         <input type="text"  id="search_text"  onKeyUp="doSomething(event);" placeholder="Seach Files">
-        <button type="submit" id="speech_icon"  onClick="speech_input();"  ><i id="speech_class" class="fa fa-microphone text-danger"></i></button>
+        <button type="submit" id="speech_icon"  onClick="speech_input();" ><i id="speech_class" class="fa fa-microphone text-danger"></i></button>
     </div>
     
     <div class="quick-links">
@@ -94,12 +94,12 @@
   var lng_ini  = 0;
   var speech_state = 0;
   var recognition = new webkitSpeechRecognition();
-  recognition.continuous=false;
+  recognition.continuous=true;
   recognition.interimResults=true;
+  
   speech_input();
   
 
-	  
 	function speech_input() {
     if(lng_ini==0){
         recognition.lang="cmn-Hant-TW";
@@ -118,6 +118,7 @@
                 document.getElementById("search_text").value=event.results[i][j].transcript;
                 redirect();
               }
+              
               recognition.start();
             }
 	}
@@ -127,11 +128,10 @@
         permission = true; 
         document.getElementById("speech_class").className='fa fa-microphone text-danger';
     }
-   
     recognition.onend   = function() { 
        permission = false; 
        document.getElementById("speech_class").className='fa fa-microphone-slash';
-	    document.getElementById("search_text").value=""
+       
     }
 	
 
