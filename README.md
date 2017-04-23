@@ -1,5 +1,6 @@
 ## Voice Search
 即說即搜，用講的就能"立即"搜尋你的個人電腦檔案。
+效果展示:https://www.youtube.com/watch?v=aEkXDkTxUiE
 
 
 ## Function API Overview
