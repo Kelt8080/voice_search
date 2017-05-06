@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+html, body, .parent{
+    background: #ffffff none repeat scroll 0 0;
+    margin-top: -85px;
+    position: absolute; 
+    top: 55px; 
+    left: 25px;
+    right: 25px; 
+    bottom: 10px;
+    z-index: 2147483641;
+}
+.parent > iframe{
+    position:absolute; 
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}
+</style>
 </head>
 <body>
 <div class="top-bar">
@@ -50,36 +69,9 @@
     
 </div>
 
-<div class="main-content">
-                <div class="widget">
-                    <iframe   name="ifrm_main" id="ifrm_main" src="about:blank"  width='100%'  frameborder="0" scrolling="no" sandbox="allow-same-origin allow-popups allow-forms allow-scripts">Loading…</iframe>
-                </div><!-- Widget -->
+<div class="parent">
+    <iframe name="ifrm_main" id="ifrm_main" src="http://127.0.0.1/"  frameborder="0" scrolling="no" sandbox="allow-same-origin allow-popups allow-forms allow-scripts">Loading…</iframe>
 </div>
-
-
-  <script type="text/javascript" async="true">        
-  window.frames['ifrm_main'].document.location="http://127.0.0.1/";
-  document.getElementById('ifrm_main').style.height=window.outerHeight+"px";
-  setTimeout(resizeFunction, 3000);
-  setTimeout(resizeFunction, 6000);
-  setTimeout(resizeFunction, 9000);
-
-  window.addEventListener("resize", resizeFunction);
-	  function resizeFunction() {
-	    var r = DetectZoom.ratios();
-	    var rationn = r.devicePxPerCssPx;
-	    
-        var content_height_i = window.outerHeight;
-        var height_i = Math.round(771.8*Math.pow(rationn,-0.611));
-        var height_f = Math.round(830.3*Math.pow(rationn,-0.602));
-        
-        if (!window.screenTop && !window.screenY) {
-             document.getElementById('ifrm_main').style.height=height_i+"px";
-        } else {
-            document.getElementById('ifrm_main').style.height=height_f+"px";
-        }
-    }
-    </script>
 
 
 <script type="text/javascript" src="js/detect-zoom.js" async="true"></script>
