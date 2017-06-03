@@ -6,7 +6,7 @@
 # Voice Search
 
 即說即搜，用講的就能"立即"搜尋你的個人電腦檔案。     
-效果展示:[**https://www.youtube.com/watch?v=aEkXDkTxUiE ▸**](https://www.youtube.com/watch?v=aEkXDkTxUiE){:target="_blank"}
+<a https://www.youtube.com/watch?v=aEkXDkTxUiE" target="_blank">效果展示:</a>
 
 ## Function API Overview
 
