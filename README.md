@@ -1,6 +1,6 @@
 
 
-<img src="https://kelt8080.github.io/public//image/app/everything.png">　&nbsp;＋&nbsp;　<img src="https://kelt8080.github.io/public//image/app/chome.png">
+<img src="https://kelt8080.github.io/public//image/app/everything.png">　&nbsp;<font size="5">+</font>,&nbsp;　<img src="https://kelt8080.github.io/public//image/app/chrome.png">
 
 
 # Voice Search
