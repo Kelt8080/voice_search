@@ -7,7 +7,8 @@
 
 即說即搜，用講的就能"立即"搜尋你的個人電腦檔案。   
 <a href="https://www.youtube.com/watch?v=aEkXDkTxUiE" target="_blank">效果展示</a>    
-[**https://www.youtube.com/watch?v=aEkXDkTxUiE ▸**](https://www.youtube.com/watch?v=aEkXDkTxUiE "效果展示" target="_blank")
+[**https://www.youtube.com/watch?v=aEkXDkTxUiE ▸**](https://www.youtube.com/watch?v=aEkXDkTxUiE "效果展示" target="_blank")   
+[Google] (http://www.google.com){target="_blank"}
 
 ## Function API Overview
 
