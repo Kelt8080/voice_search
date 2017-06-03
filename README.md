@@ -1,19 +1,19 @@
 
 
-<img src="https://kelt8080.github.io/public//image/app/everything.png">　&nbsp;<font size="5">+</font>,&nbsp;　<img src="https://kelt8080.github.io/public//image/app/chrome.png">
+<img src="https://kelt8080.github.io/public//image/app/everything.png">　&nbsp; <font size="3">+</font> &nbsp;　<img src="https://kelt8080.github.io/public//image/app/chrome.png">
 
 
 # Voice Search
 
-即說即搜，用講的就能"立即"搜尋你的個人電腦檔案。＜/br＞
-效果展示:[**https://www.youtube.com/watch?v=aEkXDkTxUiE ▸**](https://www.youtube.com/watch?v=aEkXDkTxUiE)＜/br＞
+即說即搜，用講的就能"立即"搜尋你的個人電腦檔案。＜br＞
+效果展示:[**https://www.youtube.com/watch?v=aEkXDkTxUiE ▸**](https://www.youtube.com/watch?v=aEkXDkTxUiE)＜br＞
 
 
 ## Function API Overview
 
-採用以下__API__製作完成
-`everything search engine` &ndash; 建構本機檔案index，並在本機發布成網頁
-`ChromewebkitSpeechRecognition()` &ndash; Chrome內建的語音輸入API，將語音辨識結果傳送到網頁 
+採用以下__API__製作完成＜br＞
+`everything search engine` &ndash; 建構本機檔案index，並在本機發布成網頁＜br＞
+`ChromewebkitSpeechRecognition()` &ndash; Chrome內建的語音輸入API，將語音辨識結果傳送到網頁 ＜br＞
 
 
 ## Getting Started
