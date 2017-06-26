@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search files by voice</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="top-bar">
+    <div class="logo">
+        <a title=""><i class=""><img src="https://kelt8080.github.io/public//image/app/mit_001.png" width="25" height="25"></i> cpoffice</a>
+    </div>
+    
+    <div class="c-form">
+        <input type="text"  id="search_text"  onKeyUp="doSomething(event);" placeholder="Seach Files">
+        <button type="submit" id="speech_icon"  onClick="speech_onoff();" ><i id="speech_class" class="fa fa-microphone text-danger"></i></button>
+    </div>
+    
+    <div class="quick-links">
+        <ul>
+            <li><a title="切換語系" class="hvr-float-shadow red-skin" onclick="recognition.stop();"><i class="fa fa-language"></i></a>
+                <div class="dialouge notification" style="display: none;" id="changeLan">
+                    <span>請挑選要辨識的語言</span>
+                    <a title="">
+                        <select id="select_language" class="input-sm" onchange="updateCountry();">
+                            <option value="0">Afrikaans</option><option value="1">Bahasa Indonesia</option><option value="2">Bahasa Melayu</option><option value="3">Català</option><option value="4">Čeština</option><option value="5">Dansk</option><option value="6">Deutsch</option><option value="7">English</option><option value="8">Español</option><option value="9">Euskara</option><option value="10">Filipino</option><option value="11">Français</option><option value="12">Galego</option><option value="13">Hrvatski</option><option value="14">IsiZulu</option><option value="15">Íslenska</option><option value="16">Italiano</option><option value="17">Lietuvių</option><option value="18">Magyar</option><option value="19">Nederlands</option><option value="20">Norsk bokmål</option><option value="21">Polski</option><option value="22">Português</option><option value="23">Română</option><option value="24">Slovenščina</option><option value="25">Slovenčina</option><option value="26">Suomi</option><option value="27">Svenska</option><option value="28">Tiếng Việt</option><option value="29">Türkçe</option><option value="30">Ελληνικά</option><option value="31">български</option><option value="32">Pусский</option><option value="33">Српски</option><option value="34">Українська</option><option value="35">한국어</option><option value="36">中文</option><option value="37">日本語</option><option value="38">हिन्दी</option><option value="39">ภาษาไทย</option>
+                          </select>
+                    </a>
+                    <a title="">
+                          <select id="select_dialect" class="input-sm"  style="visibility: visible;">
+                            <option value="cmn-Hans-CN">普通话 (中国大陆)</option>
+                            <option value="cmn-Hans-HK">普通话 (香港)</option>
+                            <option value="cmn-Hant-TW">中文 (台灣)</option>
+                            <option value="yue-Hant-HK">粵語 (香港)</option>
+                          </select>
+                    </a>
+                    
+                    <a class="view-all" href="#" onclick="updateLang();">確定</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="made-with">
+        <p title="">© 2017 Made with Kelt Chen</p>
+    </div>
+    
+</div>
+
+<div class="parent">
+    <iframe name="ifrm_main" id="ifrm_main" src="https://www.google.com.tw/"  frameborder="0" scrolling="no" sandbox="allow-same-origin allow-popups allow-forms allow-scripts">Loading…</iframe>
+</div>
+
+
+<script type="text/javascript" src="js/detect-zoom.js" async="true"></script>
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+<script src="js/common.js"></script>
+
+  <script type="text/javascript">
+  var permission  = false;
+  var lng_ini  = 0;
+  var speech_state = false;
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous=false;
+  recognition.interimResults=true;
+  speech_onoff();
+  
+    function speech_onoff() {
+    if(speech_state){
+              speech_state = false;
+              speech_input();
+              recognition.stop();
+            } 
+     else{
+              speech_state = true;
+              speech_input();
+            }
+	}
+
+	function speech_input() {
+    if(lng_ini==0){
+        recognition.lang="cmn-Hant-TW";
+        lng_ini  = 1;
+            } 
+    else{
+      recognition.lang = select_dialect.value;
+    }
+    if(permission){
+              recognition.stop();
+            } 
+     else{
+              recognition.onresult=function(event){
+                var i = event.resultIndex;
+                var j = event.results[i].length-1;
+                document.getElementById("search_text").value=event.results[i][j].transcript;
+                redirect();
+              }
+              
+              recognition.start();
+            }
+	}
+	
+
+    recognition.onstart = function() { 
+        permission = true; 
+        document.getElementById("speech_class").className='fa fa-microphone text-danger';
+    }
+    recognition.onend   = function() { 
+       permission = false; 
+       document.getElementById("speech_class").className='fa fa-microphone-slash';
+        if(speech_state){
+              recognition.start();
+            } 
+    }
+	
+
+    function doSomething(e) {
+        var keyCode = e.keyCode || e.charCode;
+        if (keyCode === 13) {
+            redirect();
+        }
+    }
+  
+  
+    function redirect() {
+		var add=document.getElementById("search_text").value;
+		document.getElementById('ifrm_main').src = encodeURI('https://www.google.com.tw/search?q='+add);
+        window.showModalDialog(encodeURI(Url), window, Feature  ); 
+		}
+		
+		
+  jQuery(function(){  
+  $('#search_text').on('keyup', function() {
+    redirect();
+  });
+  $('#search_text').keyup(function() {
+    redirect();
+  });
+  $('#search_text').on('change', function() {
+    redirect();
+  });
+
+  $('#search_text').change(function() {
+    redirect();
+  });
+  });
+  
+
+var langs =
+[['Afrikaans',       ['af-ZA']],
+ ['Bahasa Indonesia',['id-ID']],
+ ['Bahasa Melayu',   ['ms-MY']],
+ ['Català',          ['ca-ES']],
+ ['Čeština',         ['cs-CZ']],
+ ['Dansk',           ['da-DK']],
+ ['Deutsch',         ['de-DE']],
+ ['English',         ['en-AU', 'Australia'],
+                     ['en-CA', 'Canada'],
+                     ['en-IN', 'India'],
+                     ['en-NZ', 'New Zealand'],
+                     ['en-ZA', 'South Africa'],
+                     ['en-GB', 'United Kingdom'],
+                     ['en-US', 'United States']],
+ ['Español',         ['es-AR', 'Argentina'],
+                     ['es-BO', 'Bolivia'],
+                     ['es-CL', 'Chile'],
+                     ['es-CO', 'Colombia'],
+                     ['es-CR', 'Costa Rica'],
+                     ['es-EC', 'Ecuador'],
+                     ['es-SV', 'El Salvador'],
+                     ['es-ES', 'España'],
+                     ['es-US', 'Estados Unidos'],
+                     ['es-GT', 'Guatemala'],
+                     ['es-HN', 'Honduras'],
+                     ['es-MX', 'México'],
+                     ['es-NI', 'Nicaragua'],
+                     ['es-PA', 'Panamá'],
+                     ['es-PY', 'Paraguay'],
+                     ['es-PE', 'Perú'],
+                     ['es-PR', 'Puerto Rico'],
+                     ['es-DO', 'República Dominicana'],
+                     ['es-UY', 'Uruguay'],
+                     ['es-VE', 'Venezuela']],
+ ['Euskara',         ['eu-ES']],
+ ['Filipino',        ['fil-PH']],
+ ['Français',        ['fr-FR']],
+ ['Galego',          ['gl-ES']],
+ ['Hrvatski',        ['hr_HR']],
+ ['IsiZulu',         ['zu-ZA']],
+ ['Íslenska',        ['is-IS']],
+ ['Italiano',        ['it-IT', 'Italia'],
+                     ['it-CH', 'Svizzera']],
+ ['Lietuvių',        ['lt-LT']],
+ ['Magyar',          ['hu-HU']],
+ ['Nederlands',      ['nl-NL']],
+ ['Norsk bokmål',    ['nb-NO']],
+ ['Polski',          ['pl-PL']],
+ ['Português',       ['pt-BR', 'Brasil'],
+                     ['pt-PT', 'Portugal']],
+ ['Română',          ['ro-RO']],
+ ['Slovenščina',     ['sl-SI']],
+ ['Slovenčina',      ['sk-SK']],
+ ['Suomi',           ['fi-FI']],
+ ['Svenska',         ['sv-SE']],
+ ['Tiếng Việt',      ['vi-VN']],
+ ['Türkçe',          ['tr-TR']],
+ ['Ελληνικά',        ['el-GR']],
+ ['български',       ['bg-BG']],
+ ['Pусский',         ['ru-RU']],
+ ['Српски',          ['sr-RS']],
+ ['Українська',      ['uk-UA']],
+ ['한국어',            ['ko-KR']],
+ ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
+                     ['cmn-Hans-HK', '普通话 (香港)'],
+                     ['cmn-Hant-TW', '中文 (台灣)'],
+                     ['yue-Hant-HK', '粵語 (香港)']],
+ ['日本語',           ['ja-JP']],
+ ['हिन्दी',            ['hi-IN']],
+ ['ภาษาไทย',         ['th-TH']]];
+
+for (var i = 0; i < langs.length; i++) {
+  select_language.options[i] = new Option(langs[i][0], i);
+}
+select_language.selectedIndex = 36;
+updateCountry();
+select_dialect.selectedIndex = 2;
+
+function updateCountry() {
+  for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+    select_dialect.remove(i);
+  }
+  var list = langs[select_language.selectedIndex];
+  for (var i = 1; i < list.length; i++) {
+    select_dialect.options.add(new Option(list[i][1], list[i][0]));
+  }
+  select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+}
+
+function updateLang() {
+              
+              $("#changeLan").fadeOut("2000");
+              speech_input();
+}
+  
+    </script>
+
+
+</body>
+</html>
