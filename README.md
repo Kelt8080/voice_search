@@ -23,11 +23,13 @@
 1. 用Chrome開啟本專案網頁就可以在你的電腦上即說即搜[https://kelt8080.github.io/voice_search/](https://kelt8080.github.io/voice_search/)
 1. Chrome無法同時有多個網頁進行語音辨識，一次只能一個網頁
 
-### vision.2
+### vision.3
+* 增加後端spreadsheet紀錄搜尋紀錄
+* 輸出10項最新搜尋與5項最常搜尋
 
+### vision.2
 * 加入語系切換
 * 讓iframe自動調整高度
 
 ### vision.1
-
 * 新建

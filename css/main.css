@@ -777,28 +777,51 @@ width: 100%;
 }
 
 
-html, body, .parent{
+html, body, .right_parent{
     background: #ffffff none repeat scroll 0 0;
     position: absolute; 
+    width: 100%;
     margin-top: -85px;
     top: 55px; 
-    left: 25px;
-    right: 25px; 
+    bottom: 10px;
+    z-index: 2147483640;
+}
+.right_parent > iframe{
+    position:absolute; 
+    width: 100%;
+    height: 100%;
+    border: 0px;
+
+}
+.right_parent > iframe.everthing{
+    margin-top: 0px;
+    left: 20%;
+    width: 80vw;
+    height: 100vh;
+    
+}
+.right_parent > iframe.google{
+    margin-top: 80px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.left_parent{
+    background: #ffffff none repeat scroll 0 0;
+    position: relative;
+    width: 20%;
+    height: 85%;
+    top: 105px; 
     bottom: 10px;
     z-index: 2147483641;
 }
-.parent > iframe{
+.left_parent > iframe{
     position:absolute; 
     width: 100%;
     height: 100%;
     border: 0px;
 }
-.parent > iframe.everthing{
-    margin-top: 0px;
-}
-.parent > iframe.google{
-    margin-top: 80px;
-}
+
 
 /* Main Content */
 .main-content {

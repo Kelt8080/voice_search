@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
+              <div style="display: none;">
+                <form id='foo'>
+                  <input type="text" id="searchkey" name="searchkey" value="">
+                </form>
+              </div>
+
+    
+    
 <div class="top-bar">
     <div class="logo">
         <a title=""><i class=""><img src="https://kelt8080.github.io/public//image/app/mit_001.png" width="25" height="25"></i> cpoffice</a>
@@ -54,9 +63,50 @@
     
 </div>
 
-<div class="parent">
+<div class="right_parent">
     <iframe class="everthing" name="ifrm_main" id="ifrm_main" src="http://127.0.0.1/"  frameborder="0" scrolling="yes" sandbox="allow-same-origin allow-popups allow-forms allow-scripts">Loading…</iframe>
 </div>
+
+
+<div class="left_parent">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget">
+                <div class="buttons-sec">
+                    <div class="widget-title">
+                        <span>搜尋排名</span>
+                    </div>
+                    <button type="button" class="btns  purple-skin  sml-btn sml-radius" id="ft_badge0" onclick="bndirect('ft_badge0');"></button>
+                    <button type="button" class="btns  purple-skin  sml-btn sml-radius" id="ft_badge1" onclick="bndirect('ft_badge1');"></button>
+                    <button type="button" class="btns  purple-skin  sml-btn sml-radius" id="ft_badge2" onclick="bndirect('ft_badge2');"></button>
+                    <button type="button" class="btns  purple-skin  sml-btn sml-radius" id="ft_badge3" onclick="bndirect('ft_badge3');"></button>
+                    <button type="button" class="btns  purple-skin  sml-btn sml-radius" id="ft_badge4" onclick="bndirect('ft_badge4');"></button>
+                </div>
+                <div class="buttons-sec">
+                    <div class="widget-title">
+                        <span>最新搜尋</span>
+                    </div>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge0" onclick="bndirect('newsearch_badge0');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge1" onclick="bndirect('newsearch_badge1');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge2" onclick="bndirect('newsearch_badge2');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge3" onclick="bndirect('newsearch_badge3');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge4" onclick="bndirect('newsearch_badge4');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge5" onclick="bndirect('newsearch_badge5');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge6" onclick="bndirect('newsearch_badge6');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge7" onclick="bndirect('newsearch_badge7');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge8" onclick="bndirect('newsearch_badge8');"></button>
+                    <button type="button" class="btns  orange-skin  sml-btn sml-radius" id="newsearch_badge9" onclick="bndirect('newsearch_badge9');"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
 
 
 <script type="text/javascript" src="js/detect-zoom.js" async="true"></script>
@@ -118,6 +168,11 @@
     recognition.onend   = function() { 
        permission = false; 
        document.getElementById("speech_class").className='fa fa-microphone-slash';
+       if(document.getElementById('search_text').value || 0){
+           document.getElementById("searchkey").value=document.getElementById('search_text').value;
+           send_iframe();
+           document.getElementById('search_text').value=""
+       }
         if(speech_state){
               recognition.start();
             } 
@@ -128,6 +183,8 @@
         var keyCode = e.keyCode || e.charCode;
         if (keyCode === 13) {
             redirect();
+       document.getElementById("searchkey").value=document.getElementById('search_text').value;
+       send_iframe();
         }
     }
   
@@ -142,9 +199,13 @@
   jQuery(function(){  
   $('#search_text').on('keyup', function() {
     redirect();
+    document.getElementById("searchkey").value=document.getElementById('search_text').value;
+       send_iframe();
   });
   $('#search_text').keyup(function() {
     redirect();
+    document.getElementById("searchkey").value=document.getElementById('search_text').value;
+       send_iframe();
   });
   $('#search_text').on('change', function() {
     redirect();
@@ -253,6 +314,185 @@ function updateLang() {
 }
   
     </script>
+
+
+
+<script type="text/javascript">
+
+    function bndirect(bn_value) {
+		var add=document.getElementById(bn_value).textContent;
+		document.getElementById('ifrm_main').src = encodeURI('http://127.0.0.1/?search='+add+'&sort=date_modified&ascending=0');
+        window.showModalDialog(encodeURI(Url), window, Feature  ); 
+		}
+
+                                var scriptElement;
+                                var w_singal=0;
+                                
+                                function fetch_badget() {
+                                    var url = "https://spreadsheets.google.com/feeds/list/1dx_3oD7ed-Jc-STIyN1ky503Zli0pJrjCMiW78470mo/od6/public/values?alt=json-in-script&callback=processSheet_badget";
+                                    scriptElement = document.createElement("script");
+                                    scriptElement.src = url;
+                    				        //動態生成一個HTML對象
+                                    document.body.appendChild(scriptElement);
+                                }
+                    
+                                //更新函數
+                                function processSheet_badget(data) {
+                                        
+                                    if (document.getElementById('ft_badge0').textContent != data.feed.entry[0].gsx$ft.$t)
+                                      {
+                                        $("#ft_badge0").fadeOut("2000");
+                                        $("#ft_badge0").text(data.feed.entry[0].gsx$ft.$t);
+                                        $("#ft_badge0").fadeIn("slow");
+                                      }
+                                    if (document.getElementById('ft_badge1').textContent != data.feed.entry[1].gsx$ft.$t)
+                                      {
+                                        $("#ft_badge1").fadeOut("2000");
+                                        $("#ft_badge1").text(data.feed.entry[1].gsx$ft.$t);
+                                        $("#ft_badge1").fadeIn("slow");
+                                      }
+                                    if (document.getElementById('ft_badge2').textContent != data.feed.entry[2].gsx$ft.$t)
+                                      {
+                                        $("#ft_badge2").fadeOut("2000");
+                                        $("#ft_badge2").text(data.feed.entry[2].gsx$ft.$t);
+                                        $("#ft_badge2").fadeIn("slow");
+                                      }
+                                    if (document.getElementById('ft_badge3').textContent != data.feed.entry[3].gsx$ft.$t)
+                                      {
+                                        $("#ft_badge3").fadeOut("2000");
+                                        $("#ft_badge3").text(data.feed.entry[3].gsx$ft.$t);
+                                        $("#ft_badge3").fadeIn("slow");
+                                      }
+                                    if (document.getElementById('ft_badge4').textContent != data.feed.entry[4].gsx$ft.$t)
+                                      {
+                                        $("#ft_badge4").fadeOut("2000");
+                                        $("#ft_badge4").text(data.feed.entry[4].gsx$ft.$t);
+                                        $("#ft_badge4").fadeIn("slow");
+                                      }
+                                      
+                                     
+                                     if (document.getElementById('newsearch_badge0').textContent != data.feed.entry[0].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge0").text(data.feed.entry[0].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[1].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge1").text(data.feed.entry[1].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[2].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge2").text(data.feed.entry[2].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[3].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge3").text(data.feed.entry[3].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[4].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge4").text(data.feed.entry[4].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge0').textContent != data.feed.entry[5].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge5").text(data.feed.entry[5].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[6].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge6").text(data.feed.entry[6].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[7].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge7").text(data.feed.entry[7].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[8].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge8").text(data.feed.entry[8].gsx$newsearch.$t);
+                                      }
+                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[9].gsx$newsearch.$t)
+                                      {
+                                        $("#newsearch_badge9").text(data.feed.entry[9].gsx$newsearch.$t);
+                                      }
+                                }
+                                
+
+                                refresh_badget();
+                                
+                                function refresh_badget() {
+                                  fetch_badget();
+                                  setTimeout(refresh_badget, 1000);
+                                }
+
+
+    
+    </script>
+
+
+
+
+  <script type="text/javascript">
+	//傳送APP的page_index到api
+    function send_iframe() {
+// Variable to hold request
+var request;
+
+
+// Bind to the submit event of our form
+
+    // Abort any pending request
+    if (request) {
+        request.abort();
+    }
+    // setup some local variables
+    var $form = $("#foo");
+
+    // Let's select and cache all the fields
+    var $inputs = $form.find("input, select, button, textarea");
+
+    // Serialize the data in the form
+    var serializedData = $form.serialize();
+
+    // Let's disable the inputs for the duration of the Ajax request.
+    // Note: we disable elements AFTER the form data has been serialized.
+    // Disabled form elements will not be serialized.
+    //$inputs.prop("disabled", true);
+
+    // Fire off the request to /form.php
+    request = $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbxxnYhx0y0Fln3mUJ37GCzuCKSYVgEse7iU0ENMU_WwJoMn3Yg/exec",
+        type: "post",
+        data: serializedData
+    });
+
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("Hooray, it worked!");
+        console.log(response);
+        console.log(textStatus);
+        console.log(jqXHR);
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+    });
+
+    // Prevent default posting of form
+    event.preventDefault();
+}
+
+	</script>
+
 
 
 </body>
