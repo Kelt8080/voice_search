@@ -24,7 +24,7 @@
 1. Chrome無法同時有多個網頁進行語音辨識，一次只能一個網頁
 
 ### vision.3
-* 增加後端spreadsheet紀錄搜尋紀錄
+* 增加後端spreadsheet紀錄搜尋關鍵詞
 * 輸出10項最新搜尋與5項最常搜尋
 
 ### vision.2
