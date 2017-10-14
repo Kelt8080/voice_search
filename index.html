@@ -10,7 +10,7 @@
 <body>
 
               <div style="display: none;">
-                  <a href="#" id="windows_close"  onclick="window.location.href = '/closekiosk';"></a>
+                  <a href="#" id="windows_close"  onclick="close_self_window();"></a>
                 <form id='foo'>
                   <input type="text" id="searchkey" name="searchkey" value="">
                 </form>
@@ -151,11 +151,11 @@
   function return_index() {
       var newWindow;
         setTimeout(function(){
-          newWindow = window.open('', '_blank', 'location=no,menubar=no,status=no,top=0,left=0,width=380,height=880');
-          newWindow.resizeTo(380, 880);  
-          newWindow.moveTo(0, 0);  
+            newWindow = window.open('', '', 'location=no,menubar=no,status=no,top=0,left=0,width=100,height=100');
+            newWindow.resizeTo(window.screen.width*0.25, window.screen.height);  
+            newWindow.moveTo(0, 0);  
           newWindow.location.href = product_page_index;
-          newWindow.focus(); 
+            newWindow.focus(); 
         }, 300);
       
 	    setTimeout(function(){
@@ -163,6 +163,11 @@
 	    }, 1000);
   }
   
+  function close_self_window() {
+    window.open('', '_self', '');
+    window.close();
+  }
+
 
     function speech_onoff() {
     if(speech_state){
