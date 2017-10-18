@@ -52,7 +52,7 @@
             </li>
             <a href="https://mail.google.com/mail/u/0/#contacts" title="聯絡人" target="_blank" class="hvr-float-shadow"><img src="https://kelt8080.github.io/public/image/app/contact.png" width="35" height="35"></a>
             <a href="https://mail.google.com/mail/u/0/#inbox" title="gmail" target="_blank" class="hvr-float-shadow"><img src="https://kelt8080.github.io/public/image/app/inbox.png" width="35" height="35"></a>
-            <a href="https://drive.google.com/drive/u/0/my-drive" title="聯絡人" target="_blank" class="hvr-float-shadow"><img src="https://kelt8080.github.io/public/image/app/google_driver.png" width="35" height="35"></a>
+            <a href="https://drive.google.com/drive/u/0/my-drive" title="雲端硬碟" target="_blank" class="hvr-float-shadow"><img src="https://kelt8080.github.io/public/image/app/google_driver.png" width="35" height="35"></a>
         </ul>
     </div>
     
@@ -150,7 +150,6 @@
 
 
 
-  //轉貼完成-->關閉工作視窗-->開啟index.html-->關閉command_record.html
   function return_index() {
       var newWindow;
         setTimeout(function(){
@@ -159,6 +158,21 @@
             newWindow.moveTo(0, 0);  
           newWindow.location.href = product_page_index;
             newWindow.focus(); 
+        }, 300);
+      
+	    setTimeout(function(){
+	      document.getElementById('windows_close').click();
+	    }, 1000);
+  }
+  
+  function tran_google() {
+      var googleWindow;
+        setTimeout(function(){
+            googleWindow = window.open('', '', 'location=no,menubar=no,status=no,top=0,left=0,width=100,height=100');
+            googleWindow.resizeTo(window.screen.width, window.screen.height);  
+            googleWindow.moveTo(0, 0);  
+            googleWindow.location.href = 'index_google.html';
+            googleWindow.focus(); 
         }, 300);
       
 	    setTimeout(function(){
@@ -215,14 +229,28 @@
     recognition.onend   = function() { 
        permission = false; 
        document.getElementById("speech_class").className='fa fa-microphone-slash';
-       if(document.getElementById('search_text').value=="回到首頁"){
-           return_index();
-       }
-       else if(document.getElementById('search_text').value || ""){
-           document.getElementById("searchkey").value=document.getElementById('search_text').value;
-           send_iframe();
-           document.getElementById('search_text').value=""
-       }
+       
+        if(document.getElementById('search_text').value != ""){
+            switch(document.getElementById('search_text').value){
+                        case "回到首頁":
+                            return_index();
+                            break;  
+                        case "Google搜尋":case "搜尋Google":
+                        case "Google搜尋":
+                        case "搜尋Google":
+                        case "google搜尋":
+                        case "搜尋google":
+                            tran_google();
+                            break; 
+                        case "":
+                            break; 
+                        default: 
+                           document.getElementById("searchkey").value=document.getElementById('search_text').value;
+                           send_iframe();
+                           document.getElementById('search_text').value=""
+                            break;
+                        }
+        }
         if(speech_state){
               recognition.start();
             } 

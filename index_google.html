@@ -74,6 +74,64 @@
   recognition.continuous=false;
   recognition.interimResults=true;
   speech_onoff();
+
+
+
+    var product_page_index;
+    var scriptElement_page_index;
+    
+    function fetch_badget_page_index() {
+        var url = "https://spreadsheets.google.com/feeds/list/1zsDL6BDvjnOQQ1IirZGBEaRHQlvB6iyFnWEXXkzJJiI/od6/public/values?alt=json-in-script&callback=processSheet_page_index";
+        scriptElement_page_index = document.createElement("script");
+        scriptElement_page_index.src = url;
+        document.body.appendChild(scriptElement_page_index);
+    }
+
+
+    function processSheet_page_index(data) {
+        product_page_index = data.feed.entry[26].gsx$kelt8080.$t;
+    }
+
+   fetch_badget_page_index();
+  
+
+  function return_index() {
+      var newWindow;
+        setTimeout(function(){
+            newWindow = window.open('', '', 'location=no,menubar=no,status=no,top=0,left=0,width=100,height=100');
+            newWindow.resizeTo(window.screen.width*0.25, window.screen.height);  
+            newWindow.moveTo(0, 0);  
+          newWindow.location.href = product_page_index;
+            newWindow.focus(); 
+        }, 300);
+      
+	    setTimeout(function(){
+	      document.getElementById('windows_close').click();
+	    }, 1000);
+  }
+  
+
+  function tran_index() {
+      var fileWindow;
+        setTimeout(function(){
+            fileWindow = window.open('', '', 'location=no,menubar=no,status=no,top=0,left=0,width=100,height=100');
+            fileWindow.resizeTo(window.screen.width, window.screen.height);  
+            fileWindow.moveTo(0, 0);  
+            fileWindow.location.href = 'index.html';
+            fileWindow.focus(); 
+        }, 300);
+      
+	    setTimeout(function(){
+	      document.getElementById('windows_close').click();
+	    }, 1000);
+  }
+  
+  function close_self_window() {
+    window.open('', '_self', '');
+    window.close();
+  }
+
+
   
     function speech_onoff() {
     if(speech_state){
@@ -118,6 +176,25 @@
     recognition.onend   = function() { 
        permission = false; 
        document.getElementById("speech_class").className='fa fa-microphone-slash';
+       
+        if(document.getElementById('search_text').value != ""){
+            switch(document.getElementById('search_text').value){
+                        case "回到首頁":
+                            return_index();
+                            break;  
+                        case "搜尋檔案":
+                        case "檔案搜尋":
+                        case "搜尋本機檔案":
+                            tran_index();
+                            break; 
+                        case "":
+                            break; 
+                        default: 
+                           permission = false; 
+                           document.getElementById("speech_class").className='fa fa-microphone-slash';
+                            break;
+                        }
+        }
         if(speech_state){
               recognition.start();
             } 
