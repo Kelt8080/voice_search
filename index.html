@@ -234,6 +234,7 @@
             switch(document.getElementById('search_text').value){
                         case "回到首頁":
                             return_index();
+                            document.getElementById('search_text').value=""
                             break;  
                         case "Google搜尋":case "搜尋Google":
                         case "Google搜尋":
@@ -241,6 +242,7 @@
                         case "google搜尋":
                         case "搜尋google":
                             tran_google();
+                            document.getElementById('search_text').value=""
                             break; 
                         case "":
                             break; 
