@@ -410,91 +410,100 @@ function updateLang() {
 
                                 var scriptElement;
                                 var w_singal=0;
-                                
-                                function fetch_badget() {
-                                    var url = "https://spreadsheets.google.com/feeds/list/1dx_3oD7ed-Jc-STIyN1ky503Zli0pJrjCMiW78470mo/od6/public/values?alt=json-in-script&callback=processSheet_badget";
-                                    scriptElement = document.createElement("script");
-                                    scriptElement.src = url;
-                    				        //動態生成一個HTML對象
-                                    document.body.appendChild(scriptElement);
-                                }
-                    
-                                //更新函數
-                                function processSheet_badget(data) {
-                                        
-                                    if (document.getElementById('ft_badge0').textContent != data.feed.entry[0].gsx$ft.$t)
-                                      {
-                                        $("#ft_badge0").fadeOut("2000");
-                                        $("#ft_badge0").text(data.feed.entry[0].gsx$ft.$t);
-                                        $("#ft_badge0").fadeIn("slow");
-                                      }
-                                    if (document.getElementById('ft_badge1').textContent != data.feed.entry[1].gsx$ft.$t)
-                                      {
-                                        $("#ft_badge1").fadeOut("2000");
-                                        $("#ft_badge1").text(data.feed.entry[1].gsx$ft.$t);
-                                        $("#ft_badge1").fadeIn("slow");
-                                      }
-                                    if (document.getElementById('ft_badge2').textContent != data.feed.entry[2].gsx$ft.$t)
-                                      {
-                                        $("#ft_badge2").fadeOut("2000");
-                                        $("#ft_badge2").text(data.feed.entry[2].gsx$ft.$t);
-                                        $("#ft_badge2").fadeIn("slow");
-                                      }
-                                    if (document.getElementById('ft_badge3').textContent != data.feed.entry[3].gsx$ft.$t)
-                                      {
-                                        $("#ft_badge3").fadeOut("2000");
-                                        $("#ft_badge3").text(data.feed.entry[3].gsx$ft.$t);
-                                        $("#ft_badge3").fadeIn("slow");
-                                      }
-                                    if (document.getElementById('ft_badge4').textContent != data.feed.entry[4].gsx$ft.$t)
-                                      {
-                                        $("#ft_badge4").fadeOut("2000");
-                                        $("#ft_badge4").text(data.feed.entry[4].gsx$ft.$t);
-                                        $("#ft_badge4").fadeIn("slow");
-                                      }
+
+
+                                  var refresh_left_time_old="";
+                                  var countdown_time=0;
+                                  var spreadsheetid = '1dx_3oD7ed-Jc-STIyN1ky503Zli0pJrjCMiW78470mo'
+                                  var sheetname = 'output'
+                                  var apikey = 'AIzaSyC1aIVAZ2pp3B2PzFpBKxbdsw8p609kXcM'
+
+                                  function fetch_badget() {
+                                    const uri = 'https://sheets.googleapis.com/v4/spreadsheets/'+spreadsheetid+'/values:batchGet?ranges='+sheetname+'&majorDimension=ROWS&key='+apikey;
+                                    fetch(uri).then(response => response.json()).then(data => {
+                                      console.log(data);
+                                      var datanew = data.valueRanges[0];
                                       
-                                     
-                                     if (document.getElementById('newsearch_badge0').textContent != data.feed.entry[0].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge0").text(data.feed.entry[0].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[1].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge1").text(data.feed.entry[1].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[2].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge2").text(data.feed.entry[2].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[3].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge3").text(data.feed.entry[3].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[4].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge4").text(data.feed.entry[4].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge0').textContent != data.feed.entry[5].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge5").text(data.feed.entry[5].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[6].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge6").text(data.feed.entry[6].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[7].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge7").text(data.feed.entry[7].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[8].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge8").text(data.feed.entry[8].gsx$newsearch.$t);
-                                      }
-                                     if (document.getElementById('newsearch_badge1').textContent != data.feed.entry[9].gsx$newsearch.$t)
-                                      {
-                                        $("#newsearch_badge9").text(data.feed.entry[9].gsx$newsearch.$t);
-                                      }
-                                }
+					//更新函數
+	                                function processSheet_badget(data) {
+	                                        
+	                                    if (document.getElementById('ft_badge0').textContent != datanew.values[1][3])
+	                                      {
+	                                        $("#ft_badge0").fadeOut("2000");
+	                                        $("#ft_badge0").text(datanew.values[1][3]);
+	                                        $("#ft_badge0").fadeIn("slow");
+	                                      }
+	                                    if (document.getElementById('ft_badge1').textContent != datanew.values[2][3])
+	                                      {
+	                                        $("#ft_badge1").fadeOut("2000");
+	                                        $("#ft_badge1").text(datanew.values[2][3]);
+	                                        $("#ft_badge1").fadeIn("slow");
+	                                      }
+	                                    if (document.getElementById('ft_badge2').textContent != datanew.values[3][3])
+	                                      {
+	                                        $("#ft_badge2").fadeOut("2000");
+	                                        $("#ft_badge2").text(datanew.values[3][3]);
+	                                        $("#ft_badge2").fadeIn("slow");
+	                                      }
+	                                    if (document.getElementById('ft_badge3').textContent != datanew.values[4][3])
+	                                      {
+	                                        $("#ft_badge3").fadeOut("2000");
+	                                        $("#ft_badge3").text(datanew.values[4][3]);
+	                                        $("#ft_badge3").fadeIn("slow");
+	                                      }
+	                                    if (document.getElementById('ft_badge4').textContent != datanew.values[5][3])
+	                                      {
+	                                        $("#ft_badge4").fadeOut("2000");
+	                                        $("#ft_badge4").text(datanew.values[5][3]);
+	                                        $("#ft_badge4").fadeIn("slow");
+	                                      }
+	                                      
+	                                     
+	                                     if (document.getElementById('newsearch_badge0').textContent != datanew.values[1][1])
+	                                      {
+	                                        $("#newsearch_badge0").text(datanew.values[1][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge1').textContent != datanew.values[2][1])
+	                                      {
+	                                        $("#newsearch_badge1").text(datanew.values[2][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge2').textContent != datanew.values[3][1])
+	                                      {
+	                                        $("#newsearch_badge2").text(datanew.values[3][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge3').textContent != datanew.values[4][1])
+	                                      {
+	                                        $("#newsearch_badge3").text(datanew.values[4][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge4').textContent != datanew.values[5][1])
+	                                      {
+	                                        $("#newsearch_badge4").text(datanew.values[5][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge5').textContent != datanew.values[6][1])
+	                                      {
+	                                        $("#newsearch_badge5").text(datanew.values[6][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge6').textContent != datanew.values[7][1])
+	                                      {
+	                                        $("#newsearch_badge6").text(datanew.values[7][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge7').textContent != datanew.values[8][1])
+	                                      {
+	                                        $("#newsearch_badge7").text(datanew.values[8][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge8').textContent != datanew.values[9][1])
+	                                      {
+	                                        $("#newsearch_badge8").text(datanew.values[9][1]);
+	                                      }
+	                                     if (document.getElementById('newsearch_badge9').textContent != datanew.values[10][1])
+	                                      {
+	                                        $("#newsearch_badge9").text(datanew.values[10][1]);
+	                                      }
+	                                }
+					    
+
+                                      });
+                                  }
                                 
 
                                 refresh_badget();
