@@ -23,7 +23,7 @@
 4. everything search engine會自動在背景建構本機的檔案索引，時間視你的電腦效與資料量能而定，大概10min~2hours
 5. 用Chrome開啟本專案網頁就可以在你的電腦上即說即搜[https://kelt8080.github.io/voice_search/](https://kelt8080.github.io/voice_search/)
 6. Chrome無法同時有多個網頁進行語音辨識，一次只能一個網頁
-7. 私人檔案與共用檔案可以直接2.索引磁碟與目錄，如果是管制檔案，可以透過everything製作保密目錄的檔案清單放到公用目錄中供大家搜尋得到，但是必須申請權限才能使用[https://www.voidtools.com/en-au/support/everything/file_lists/](https://www.voidtools.com/en-au/support/everything/file_lists/)，以達成公用，管制，私用的檔案三層式權限管理
+7. 私人檔案與共用檔案可以直接2.索引磁碟與目錄，如果是管制檔案，可以透過everything製作保密目錄的檔案清單放到公用目錄中供大家搜尋得到，但是必須申請公司的公用目錄權限才能使用[https://www.voidtools.com/en-au/support/everything/file_lists/](https://www.voidtools.com/en-au/support/everything/file_lists/)，以達成公用，管制，私用的檔案三層式權限管理
 
 
 ### vision.4
